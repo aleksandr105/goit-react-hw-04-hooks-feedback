@@ -36,9 +36,10 @@ export const FeedbackSection = ({ title, titleStatistic }) => {
   };
 
   const CountTotalFeedback = () => good + neutral + bad;
+  const toalClicks = CountTotalFeedback();
 
   const PositiveFeedback = () => {
-    let interestSumm = Math.round((good / CountTotalFeedback()) * 100);
+    let interestSumm = Math.round((good / toalClicks) * 100);
     const interest = interestSumm > 0 ? interestSumm : 0;
     return interest;
   };
@@ -52,15 +53,15 @@ export const FeedbackSection = ({ title, titleStatistic }) => {
           onLeaveFeedback={handleFeedback}
         />
         <TitleStatistic>{titleStatistic}</TitleStatistic>
-        {CountTotalFeedback() === 0 && (
+        {toalClicks === 0 && (
           <Notification message={'There is no feedback'}></Notification>
         )}
-        {CountTotalFeedback() !== 0 && (
+        {toalClicks !== 0 && (
           <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
-            summFeedback={CountTotalFeedback()}
+            summFeedback={toalClicks}
             positiveFeedbac={PositiveFeedback()}
           />
         )}
